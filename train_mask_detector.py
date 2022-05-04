@@ -91,13 +91,16 @@ lb = LabelBinarizer()
 labels = lb.fit_transform(labels)
 labels = to_categorical(labels)
  
+# conveting list of preprocessed images and labels to numpy array
 data = np.array(data, dtype="float32")
 labels = np.array(labels)
 
+# creating two training datasets
 (trainX, testX, trainY, testY) = train_test_split(data, labels,
                                                   test_size=0.20, stratify=labels, random_state=42)
 
 # construct the training image generator for data augmentation
+# data augmentation is used when we have very less images. It basically shows same images with different features
 aug = ImageDataGenerator(
     rotation_range=20,
     zoom_range=0.15,
@@ -109,6 +112,7 @@ aug = ImageDataGenerator(
 
 # load the MobileNetV2 network, ensuring the head FC layer sets are
 # left off
+# MobileNetV2 is used to classify images with low computing power
 baseModel = MobileNetV2(weights="imagenet", include_top=False,
                         input_tensor=Input(shape=(224, 224, 3)))
 
