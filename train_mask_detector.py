@@ -135,6 +135,12 @@ for layer in baseModel.layers:
     layer.trainable = False
 
 # compile our model
+# Gradient Descent is known as one of the most commonly used optimization algorithms to train machine learning
+# models by means of minimizing errors between actual and expected results. Further, gradient descent is 
+# also used to train Neural Networks
+
+# The cost function is defined as the measurement of difference or error between actual values and expected values
+# at the current position and present in the form of a single real number
 print("[INFO] compiling model...")
 opt = Adam(lr=INIT_LR, decay=INIT_LR / EPOCHS)
 model.compile(loss="binary_crossentropy", optimizer=opt,
